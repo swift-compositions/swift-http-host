@@ -13,17 +13,9 @@ let package = Package(
     products: [
         .library(name: "HTTP Host", targets: ["HTTP Host"])
     ],
-    dependencies: [
-        .package(url: "https://github.com/swift-compositions/swift-server.git", branch: "main"),
-        .package(url: "https://github.com/swift-standards/swift-http-standard.git", branch: "main"),
-    ],
     targets: [
         .target(
-            name: "HTTP Host",
-            dependencies: [
-                .product(name: "Server", package: "swift-server"),
-                .product(name: "HTTP Standard", package: "swift-http-standard"),
-            ]
+            name: "HTTP Host"
         ),
         .testTarget(
             name: "HTTP Host Tests",
