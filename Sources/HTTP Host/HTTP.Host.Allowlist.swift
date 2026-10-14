@@ -1,12 +1,4 @@
-// ===----------------------------------------------------------------------===//
-//
-// Copyright (c) 2026 Coen ten Thije Boonkkamp
-// Licensed under Apache License 2.0
-//
-// ===----------------------------------------------------------------------===//
-
 extension Host {
-    /// An exact host allowlist that is independent of an HTTP server engine.
     public struct Allowlist: Sendable {
         private let hosts: Set<String>
 
@@ -17,11 +9,6 @@ extension Host {
 }
 
 extension Host.Allowlist {
-    /// Authorizes an authority or `Host` header value.
-    ///
-    /// A valid numeric port is removed before exact membership is checked.
-    /// Bracketed IPv6 hosts retain their brackets, so `[::1]:443` compares
-    /// with the configured host `[::1]`.
     public func authorize(_ authority: String?) throws(Host.Error) -> Host.Decision {
         guard let authority, !authority.isEmpty else {
             throw .missing
@@ -63,7 +50,7 @@ extension Host.Allowlist {
         return String(authority[..<separator])
     }
 
-    fileprivate static func validPort(_ port: some Swift.Collection<Character>) -> Bool {
+    fileprivate static func validPort(_ port: some Swift::Collection<Character>) -> Bool {
         guard !port.isEmpty,
             port.allSatisfy({ $0.isNumber }),
             let value = Int(String(port))
